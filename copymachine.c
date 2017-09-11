@@ -59,8 +59,14 @@ int main(void) {
             break;
         }
     }
+
+    int output = open(outputName, O_WRONLY | O_CREAT | O_EXCL, 0644);
     
-    int output = open(outputName, O_WRONLY | O_CREAT, 0644);
+    if ((int)output == -1){
+        write(1, errorMessage, sizeof(errorMessage)-1);
+        return 0;
+    }
+
     
 
 
