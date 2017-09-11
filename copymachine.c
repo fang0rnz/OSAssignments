@@ -71,11 +71,10 @@ int main(void) {
 
 
     char content;
-    // printf ("\nsize: %d\n", realSize);
 
 
     int count;
-    while (count = read (input, &content, sizeof(content)) > 0){ //I need the file descriptor to be set at 0 here...
+    while (count = read (input, &content, sizeof(content)) > 0){ 
     
         write (output, &content, count);
     
@@ -88,7 +87,6 @@ int main(void) {
     write(1, sucessMessage , sizeof(sucessMessage)-1);
 
 
-    // fopen(fileName, "w+");
     
     return 0;
 }   
