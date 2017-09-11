@@ -2,7 +2,6 @@
 
 #include <unistd.h>
 #include <fcntl.h>
-#include <stdio.h>
 
 int main(void) {
     
@@ -60,9 +59,14 @@ int main(void) {
         }
     }
     
-    int arq2 = open(outputName, O_WRONLY | O_CREAT, 0644);
+    int output = open(outputName, O_WRONLY | O_CREAT, 0644);
     
     
+    char content[3];
+
+    read (input, content, sizeof(content));
+    write (output, content, sizeof(content));
+
     // fopen(fileName, "w+");
     
     return 0;
