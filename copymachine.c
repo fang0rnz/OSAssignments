@@ -17,12 +17,12 @@ int main(void) {
     read(STDIN_FILENO, fileName, 512);
     
     int i = 0;
-    int inputSize = 0;
+    int inputNameSize = 0;
     
     /*swaps newline char for end of string char on fileName
-    and gets the proper string inputSize*/
+    and gets the proper string inputNameSize*/
     for (i=0; i<512; i++){
-        inputSize++;
+        inputNameSize++;
         if (fileName[i] == 10){
             fileName[i] = '\0';
             break;
@@ -31,7 +31,7 @@ int main(void) {
     
     
     write(1, openingMessage, sizeof(openingMessage)-1);
-    write(1, fileName, inputSize);
+    write(1, fileName, inputNameSize);
     
     int input = open(fileName, O_RDONLY, 0644);
     
@@ -50,7 +50,7 @@ int main(void) {
     
     int outputSize = 0;
     /*swaps newline char for end of string char on fileName
-    and gets the proper string inputSize*/
+    and gets the proper string inputNameSize*/
     for (i=0; i<512; i++){
         outputSize++;
         if (outputName[i] == 10){
@@ -61,11 +61,27 @@ int main(void) {
     
     int output = open(outputName, O_WRONLY | O_CREAT, 0644);
     
-    
-    char content[3];
 
-    read (input, content, sizeof(content));
-    write (output, content, sizeof(content));
+
+    char content;
+    // printf ("\nsize: %d\n", realSize);
+
+    off_t fsize;
+
+    fsize = lseek (input, 0, SEEK_END);
+
+    for (i=0; i<fsize; i++){ //I need the file descriptor to be set at 0 here...
+    
+        printf("%c", content);
+        read (input, &content, sizeof(content));
+
+
+
+        write (output, &content, sizeof(content));
+    
+    }
+
+
 
     // fopen(fileName, "w+");
     
