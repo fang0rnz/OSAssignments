@@ -9,6 +9,7 @@ int main(void) {
     const char errorMessage[] = "\nYou did something wrong or either file doesn't exist. Check specifications.\n";
     const char welcomeMessage[] = "File to be opened and read: \n";
     const char writeMessage[] = "\nFile to be opened and written: \n";
+    const char sucessMessage[] = "\nFile copies successfully.\n";
     write(1, welcomeMessage, sizeof(welcomeMessage)-1);
     
     char fileName[512];
@@ -66,21 +67,19 @@ int main(void) {
     char content;
     // printf ("\nsize: %d\n", realSize);
 
-    off_t fsize;
 
-    fsize = lseek (input, 0, SEEK_END);
 
-    for (i=0; i<fsize; i++){ //I need the file descriptor to be set at 0 here...
+    while (read (input, &content, sizeof(content)) > 0){ //I need the file descriptor to be set at 0 here...
     
-        printf("%c", content);
-        read (input, &content, sizeof(content));
-
-
-
-        write (output, &content, sizeof(content));
+     write (output, &content, sizeof(content));
     
     }
 
+    close(input);
+    close(output);
+
+
+    write(1, sucessMessage , sizeof(sucessMessage)-1);
 
 
     // fopen(fileName, "w+");
