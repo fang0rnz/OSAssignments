@@ -74,10 +74,10 @@ int main(void) {
     // printf ("\nsize: %d\n", realSize);
 
 
-
-    while (read (input, &content, sizeof(content)) > 0){ //I need the file descriptor to be set at 0 here...
+    int count;
+    while (count = read (input, &content, sizeof(content)) > 0){ //I need the file descriptor to be set at 0 here...
     
-     write (output, &content, sizeof(content));
+        write (output, &content, count);
     
     }
 
